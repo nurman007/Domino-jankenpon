@@ -1,0 +1,56 @@
+:root{--sky:#4aa8ff;--navy:#12305c;--ink:#1b2a41;--bg:#eaf5ff;--cw:63.5mm;--ch:88.9mm}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,Roboto,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:var(--navy);color:#fff}
+header a{color:#fff;font-size:26px;line-height:1;text-decoration:none}
+h1{flex:1;margin:0;font-size:18px}
+nav{display:flex;gap:6px;width:100%}
+nav button{flex:1;border:0;background:#27497d;color:#fff}
+nav button.on{background:var(--sky);color:#06233f}
+main,#printbar{max-width:560px;margin:0 auto;padding:12px}
+h3{margin:18px 0 6px;font-size:16px}
+p{margin:10px 0 4px}
+button{font:inherit;padding:9px 12px;border:2px solid #b8d9f5;border-radius:10px;background:#fff;color:var(--ink)}
+button.on{border-color:var(--sky);background:#d7ecff;font-weight:700}
+input{font:inherit;padding:9px;border:2px solid #b8d9f5;border-radius:10px;background:#fff;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.row input{flex:1}
+.chips,.seg{display:flex;gap:8px;margin:8px 0}.chips button,.seg button{flex:1;padding-inline:4px}
+.prev{display:flex;justify-content:center;margin:14px 0}.prev .card{box-shadow:0 6px 18px rgba(18,48,92,.25)}
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pk button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px}
+.pk svg,.pk img{width:42px;height:42px;object-fit:contain}
+.hint{font-size:13px;opacity:.75}
+#calib div{display:flex;align-items:center;gap:8px;margin:4px 0}#calib span{flex:1}
+/* kartu */
+.card{position:relative;width:var(--cw);height:var(--ch);background:#fffdf6;border:.2mm solid #7a8aa3;border-radius:3.5mm;overflow:hidden;color:var(--navy)}
+.corner{position:absolute;left:3mm;top:3mm;width:11mm;height:11mm}
+.corner.br{left:auto;top:auto;right:3mm;bottom:3mm;transform:rotate(180deg)}
+.corner img,.corner svg{width:100%;height:100%;object-fit:contain;display:block}
+.art{position:absolute;left:6mm;right:6mm;top:17mm;bottom:17mm;display:grid;place-items:center;border:.4mm solid var(--navy);border-radius:2mm;overflow:hidden;background:repeating-linear-gradient(45deg,#eef6ff 0 2mm,#fff 2mm 4mm);font-size:3mm;color:#5b7ba3;text-align:center}
+.art:empty::after{content:"Belum ada gambar"}
+.art.bad::after{content:"Gagal memuat gambar"}.art.bad img{display:none}
+.art img{width:100%;height:100%;object-fit:cover;display:block}.art.contain img{object-fit:contain}
+.card.back{border-color:#2a6fb8;background:radial-gradient(ellipse at center,#dff2ff 0%,#7ec6ff 45%,#2f88e8 100%)}
+/* lembar A4: grid 2x3 di tengah kertas, simetris agar sisi belakang pas */
+.box{width:calc(210mm*var(--k,1));height:calc(297mm*var(--k,1));margin:12px auto;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(18,48,92,.3)}
+.sheet{position:relative;width:210mm;height:297mm;transform:scale(var(--k,1));transform-origin:0 0;display:grid;grid-template-columns:repeat(2,var(--cw));grid-template-rows:repeat(3,var(--ch));justify-content:center;align-content:center}
+.box-back .sheet{left:calc(var(--ox,0mm)*var(--k,1));top:calc(var(--oy,0mm)*var(--k,1))}
+body[data-tab=edit] #sheets,body[data-tab=edit] #printbar,body:not([data-tab=edit]) #edit,body:not([data-tab=back]) #calib{display:none}
+body[data-tab=front] .box-back,body[data-tab=back] .box-front{display:none}
+@page{size:A4;margin:0}
+@media print{
+ body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #ui{display:none!important}#sheets{display:block!important}
+ body .box{display:block!important;width:210mm!important;height:296mm!important;margin:0!important;box-shadow:none!important}
+ body.p-front .box-back,body.p-back .box-front{display:none!important}
+ .box-back{break-before:page}
+ .sheet{transform:none!important}
+ .box-back .sheet{left:var(--ox,0mm)!important;top:var(--oy,0mm)!important}
+ .art:empty::after,.art.bad::after{content:none!important}
+}
+/* latar sisa pada mode utuh */
+.art.contain.bg-putih{background:#fff}.art.contain.bg-hitam{background:#000}.art.contain.bg-blur{background:#2a3a52}
+.art .bgimg{position:absolute;inset:0;width:100%;height:100%;filter:blur(2.5mm) brightness(.75);transform:scale(1.2)}
+.art.contain .bgimg{object-fit:cover}
+.art .fg{position:relative;z-index:1}
+.chk{display:flex;align-items:center;gap:8px;margin:8px 0}.chk input{width:20px;height:20px;padding:0;accent-color:var(--sky)}
