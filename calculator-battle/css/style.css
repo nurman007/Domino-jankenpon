@@ -1,0 +1,81 @@
+:root{--sky:#4aa8ff;--navy:#12305c;--ink:#1b2a41;--bg:#eaf5ff;--c0:#2f88e8;--c1:#e5484d}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font:15px/1.45 system-ui,Roboto,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--navy);color:#fff}
+header a{color:#fff;font-size:26px;line-height:1;text-decoration:none}
+h1{flex:1;margin:0;font-size:18px}
+header button{border:0;background:var(--sky);color:#06233f;font-weight:700}
+main{max-width:560px;margin:0 auto;padding:12px}
+h3{margin:16px 0 6px;font-size:16px}
+button{font:inherit;padding:10px 12px;border:2px solid #b8d9f5;border-radius:10px;background:#fff;color:var(--ink);touch-action:manipulation}
+button.on{border-color:var(--sky);background:#d7ecff;font-weight:700}
+button:disabled{opacity:.35}
+input{font:inherit;padding:10px;border:2px solid #b8d9f5;border-radius:10px;background:#fff;min-width:0;width:100%}
+.seg,.row{display:flex;gap:8px;margin:8px 0}.seg button,.row button,.row input{flex:1}
+.hint{font-size:13px;opacity:.75;margin:4px 0}
+.pc{background:#fff;border-radius:14px;padding:4px 12px 12px;margin:12px 0;border-left:6px solid var(--c0)}.pc.c1{border-color:var(--c1)}
+.pic{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:10px}.pic .row{width:100%}
+.go{width:100%;margin:12px 0 0;padding:14px;font-size:17px;font-weight:700;background:var(--navy);border-color:var(--navy);color:#fff}
+.go.alt{background:#fff;color:var(--navy)}
+/* layar pertandingan */
+.tgt{text-align:center;margin:4px 0 8px;font-weight:600}
+.champ{padding:12px;margin-bottom:10px;border-radius:12px;background:#ffd54a;color:#4a3500;text-align:center;font-weight:800;font-size:18px}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.side{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:16px;background:#fff;border-top:6px solid var(--c0);transition:opacity .2s}
+.side.c1{border-color:var(--c1)}
+.side h2{margin:0;font-size:17px;text-align:center;overflow-wrap:anywhere}
+.num{font-size:clamp(64px,24vw,120px);font-weight:800;line-height:1;color:var(--c0)}.c1 .num{color:var(--c1)}
+.side small{opacity:.6;margin-top:-4px}
+.plus,.minus{width:100%}
+.plus{padding:16px;font-size:28px;font-weight:800;background:var(--c0);border-color:var(--c0);color:#fff}.c1 .plus{background:var(--c1);border-color:var(--c1)}
+.minus{font-size:22px}
+.side.won{box-shadow:0 0 0 3px #ffd54a}.side.lost{opacity:.6}
+.rst{width:100%;margin:12px 0}.rst.armed{background:var(--c1);border-color:var(--c1);color:#fff;font-weight:700}
+.log{list-style:none;margin:0;padding:0;max-height:34vh;overflow:auto;background:#fff;border-radius:12px}
+.log li{padding:7px 12px;border-bottom:1px solid #e6f0fa}.log time{opacity:.55;margin-right:6px;font-variant-numeric:tabular-nums}
+/* papan skor: tampilan landscape */
+.vs,.tools{display:none}
+@keyframes pulse{to{transform:scale(1.05);box-shadow:0 0 26px rgba(255,213,74,.7)}}
+@media (orientation:landscape){
+ body.battle{background:radial-gradient(ellipse at 50% 0,#14305a,#050b17 75%);color:#e8f1ff}
+ body.battle header{display:none}
+ body.battle #battle{max-width:none;height:100vh;height:100dvh;padding:2vh 2vw}
+ .board{display:grid;grid-template-columns:1fr minmax(190px,26vw) 1fr;grid-template-rows:auto minmax(0,1fr);gap:2vh 1.6vw;height:100%}
+ .sides{display:contents}
+ #s0{grid-area:1/1/3/2}#s1{grid-area:1/3/3/4}
+ .top{grid-area:1/2;text-align:center}
+ .bot{grid-area:2/2;display:flex;flex-direction:column;gap:1vh;min-height:0}
+ .vs{display:block;font-size:min(9vh,5vw);font-weight:900;letter-spacing:.2em;opacity:.5}
+ .tools{display:flex;gap:6px}.tools button{flex:1;padding:6px;font-size:12px;background:rgba(255,255,255,.08);color:#cfe3ff;border-color:rgba(255,255,255,.2)}
+ .tgt{margin:0;font-size:clamp(12px,3vh,18px);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+ .champ{margin-top:1vh;font-size:clamp(14px,3.6vh,26px);animation:pulse 1.2s ease-in-out infinite alternate}
+ .side{height:100%;justify-content:center;gap:1.2vh;background:rgba(255,255,255,.04);border:2px solid var(--c0);border-radius:22px;box-shadow:inset 0 0 40px rgba(47,136,232,.25),0 0 28px rgba(47,136,232,.2)}
+ .side.c1{border-color:var(--c1);box-shadow:inset 0 0 40px rgba(229,72,77,.25),0 0 28px rgba(229,72,77,.2)}
+ .side.won{box-shadow:0 0 0 3px #ffd54a,0 0 40px rgba(255,213,74,.5)}
+ .side h2{font-size:clamp(16px,4.4vh,38px);text-transform:uppercase;letter-spacing:.08em}
+ .num{font-size:min(36vh,20vw);text-shadow:0 0 .12em currentColor}
+ .side small{font-size:clamp(11px,2.6vh,16px);opacity:.7}
+ .plus{padding:min(2.2vh,12px);font-size:clamp(22px,5.5vh,44px)}
+ .minus{padding:min(1.2vh,8px);background:transparent;color:#cfe3ff;border-color:rgba(255,255,255,.3)}
+ .rst{margin:0;background:transparent;color:#cfe3ff;border-color:rgba(255,255,255,.3)}
+ .bot h3{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+ .log{flex:1;min-height:0;max-height:none;background:rgba(255,255,255,.06);color:#cfe3ff;font-size:12px}.log li{border-color:rgba(255,255,255,.08)}
+}
+/* foto pemain: pratinjau potongan (geser + zoom) */
+.crop{position:relative;width:min(100%,150px);aspect-ratio:3/5;overflow:hidden;border-radius:14px;background:#dbe9f7;display:grid;place-items:center;font-size:40px;touch-action:none;cursor:grab}
+.crop:empty::after{content:"👤"}.crop.bad::after{content:"Gagal";font-size:13px}
+.crop img,.bgph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--x) var(--y);transform:scale(var(--z));transform-origin:var(--x) var(--y);user-select:none;-webkit-user-drag:none}
+.crop.bad img,.bgph.bad img{display:none}
+.zoom{display:flex;align-items:center;gap:8px;width:100%}.zoom input{flex:1;padding:0;border:0}
+/* foto full di kotak angka */
+.side{position:relative;overflow:hidden}
+.side>*{position:relative;z-index:1}
+.side>.bgph{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#16304f,#0a1626)}
+.bgph::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.08) 38%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.72))}
+.side.c0{--c:var(--c0)}.side.c1{--c:var(--c1)}
+.hasimg{color:#fff}
+.hasimg h2{margin-bottom:auto;text-shadow:0 2px 8px #000}
+.hasimg .num{margin-top:auto;color:#fff;text-shadow:0 0 .12em var(--c),0 2px 12px #000}
+.hasimg small{margin-bottom:auto;opacity:.9;text-shadow:0 1px 4px #000}
+@media (orientation:portrait){.hasimg{min-height:300px}}
